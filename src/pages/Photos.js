@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useContext }from "react"
+import Image from "../components/Image"
+import { getClass } from "../utils"
+import { Context } from "../context/Context"
 
 function Photos() {
+
+    const {allPhotos} = useContext(Context);
+
+    const photoGrid = allPhotos.map((photo, index) => {
+        return <Image key={photo.id} img={photo} className={getClass(index)}/>
+    })
+    console.log(photoGrid);
     return (
         <main className="photos">
-            <h1>Images go here</h1>
+            {photoGrid}
         </main>
     )
 }

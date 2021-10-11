@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const { Provider, Consumer } = React.createContext();
+const Context = React.createContext();
 
 // Generally, the props are passed into the function, but we are destructuring the props object to grab the children key
 function ContextProvider({ children }) {
-    const [allPhotos, setAllPhotos] = useState(["photo1", "photo2"]);
+    const [allPhotos, setAllPhotos] = useState([]);
 
     async function fetchData() {
         const response = await fetch('https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json',
@@ -13,7 +13,7 @@ function ContextProvider({ children }) {
             });
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            setAllPhotos(data);
         } else {
             alert("There was an issue retrieving the photos");
         }
@@ -24,11 +24,12 @@ function ContextProvider({ children }) {
       fetchData();
     }, []);
 
+    console.log(allPhotos);
     return (
-        <Provider value={{ allPhotos }}>
+        <Context.Provider value={{ allPhotos }}>
             {children}
-        </Provider>
+        </Context.Provider>
     );
 };
 
-export { ContextProvider, Consumer as ContextConsumer };
+export { ContextProvider , Context };
