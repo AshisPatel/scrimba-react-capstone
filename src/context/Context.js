@@ -39,10 +39,18 @@ function ContextProvider({ children }) {
         setAllPhotos(newArray); 
     }
 
-    // Function to add an image to the cart, based on item id
-
     function addToCart(img) {
         setCartItems(prevState => [...prevState, img]);
+    }
+
+    function removeFromCart(id) {
+        // In the nature of not directly editting state, we map through the cartItems array
+        // During the map, we can filter the results and return all the images that do not have the id of the selected image. 
+
+        const newCart = cartItems.filter(item => item.id !== id); 
+        console.log(cartItems);
+        console.log(newCart);
+        setCartItems(newCart);
     }
     
     useEffect(() => {
@@ -50,7 +58,7 @@ function ContextProvider({ children }) {
     }, []);
 
     return (
-        <Context.Provider value={{ allPhotos, cartItems, toggleFavorite, addToCart }}>
+        <Context.Provider value={{ allPhotos, cartItems, toggleFavorite, addToCart, removeFromCart }}>
             {children}
         </Context.Provider>
     );
