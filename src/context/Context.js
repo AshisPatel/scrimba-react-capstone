@@ -20,13 +20,33 @@ function ContextProvider({ children }) {
 
     }
 
+    function toggleFavorite(id) {
+        // This method allows us to not modify the state. So we map through the entire array
+        const newArray = allPhotos.map(photo => {
+            // If the id matches, we return the photo object with it's isFavorite property flipped
+            if(photo.id === id) {
+                console.log(id);
+                console.log(!photo.isFavorite);
+                return {
+                    // We use the spread operator to include all other properties of the object along with the modified isFavorite key
+                    ...photo,
+                    isFavorite: !photo.isFavorite
+                };
+            }
+            // Return the original object that is not modified if the id does not match
+            return photo;
+        });
+
+        setAllPhotos(newArray); 
+    }
+
     useEffect(() => {
       fetchData();
     }, []);
 
     console.log(allPhotos);
     return (
-        <Context.Provider value={{ allPhotos }}>
+        <Context.Provider value={{ allPhotos, toggleFavorite }}>
             {children}
         </Context.Provider>
     );
