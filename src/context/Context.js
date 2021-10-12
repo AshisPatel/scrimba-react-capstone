@@ -5,6 +5,7 @@ const Context = React.createContext();
 // Generally, the props are passed into the function, but we are destructuring the props object to grab the children key
 function ContextProvider({ children }) {
     const [allPhotos, setAllPhotos] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     async function fetchData() {
         const response = await fetch('https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json',
@@ -25,8 +26,6 @@ function ContextProvider({ children }) {
         const newArray = allPhotos.map(photo => {
             // If the id matches, we return the photo object with it's isFavorite property flipped
             if(photo.id === id) {
-                console.log(id);
-                console.log(!photo.isFavorite);
                 return {
                     // We use the spread operator to include all other properties of the object along with the modified isFavorite key
                     ...photo,
@@ -40,13 +39,18 @@ function ContextProvider({ children }) {
         setAllPhotos(newArray); 
     }
 
+    // Function to add an image to the cart, based on item id
+
+    function addToCart(img) {
+        setCartItems(prevState => [...prevState, img]);
+    }
+    
     useEffect(() => {
       fetchData();
     }, []);
 
-    console.log(allPhotos);
     return (
-        <Context.Provider value={{ allPhotos, toggleFavorite }}>
+        <Context.Provider value={{ allPhotos, cartItems, toggleFavorite, addToCart }}>
             {children}
         </Context.Provider>
     );
