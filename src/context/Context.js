@@ -44,12 +44,9 @@ function ContextProvider({ children }) {
     }
 
     function removeFromCart(id) {
-        // In the nature of not directly editting state, we map through the cartItems array
-        // During the map, we can filter the results and return all the images that do not have the id of the selected image. 
+        // In the nature of not directly editting state, we can filter the results and return all the images that do not have the id of the selected image. 
 
         const newCart = cartItems.filter(item => item.id !== id); 
-        console.log(cartItems);
-        console.log(newCart);
         setCartItems(newCart);
     }
     
