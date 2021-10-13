@@ -49,13 +49,17 @@ function ContextProvider({ children }) {
         const newCart = cartItems.filter(item => item.id !== id); 
         setCartItems(newCart);
     }
+
+    function clearCart() {
+        setCartItems([]);
+    }
     
     useEffect(() => {
       fetchData();
     }, []);
 
     return (
-        <Context.Provider value={{ allPhotos, cartItems, toggleFavorite, addToCart, removeFromCart }}>
+        <Context.Provider value={{ allPhotos, cartItems, toggleFavorite, addToCart, removeFromCart, clearCart }}>
             {children}
         </Context.Provider>
     );
