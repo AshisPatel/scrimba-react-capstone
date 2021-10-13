@@ -5,7 +5,7 @@ import { Context } from "../context/Context"
 
 function Photos() {
 
-    const {allPhotos} = useContext(Context);
+    const { allPhotos } = useContext(Context);
 
     const photoGrid = allPhotos.map((photo, index) => {
         return <Image key={photo.id} img={photo} className={getClass(index)}/>
