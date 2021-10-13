@@ -10,7 +10,7 @@ function Image({ className, img }) {
     const [isHovered, ref] = useHover();
 
     const heartIcon = isHovered && <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
-    const favoritedHeartIcon = isHovered && <i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
+    const favoritedHeartIcon =  <i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
 
     function cartIcon() {
 
