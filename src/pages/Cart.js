@@ -11,6 +11,8 @@ function Cart() {
 
     const [buttonText, setButtonText] = useState("Place Order");
 
+    const placeOrderBtn = cartItems.length > 0 ? <button onClick={placeOrder}>{buttonText}</button> : <p>You have no items in your cart!</p>
+
     function totalCost() {
         const totalCost = cartItems.length * 5.99;
         return totalCost.toLocaleString("en-US", {style: "currency", currency: "USD"});
@@ -19,7 +21,7 @@ function Cart() {
     function placeOrder() {
         setButtonText("Ordering...");
         setTimeout(() => {
-            // alert("Order placed!");
+            alert("Order placed!");
             setButtonText("Place Order");
             clearCart();
         }, 3000)
@@ -31,7 +33,7 @@ function Cart() {
             {cartItemElements}
             <p className="total-cost">Total: {totalCost()}</p>
             <div className = "order-button">
-                <button onClick={placeOrder()}>{buttonText}</button>
+                {placeOrderBtn}
             </div>
         </main>
     )
